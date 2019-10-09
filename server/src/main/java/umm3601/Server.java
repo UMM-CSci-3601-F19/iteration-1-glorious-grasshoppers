@@ -8,6 +8,8 @@ import spark.Route;
 import spark.utils.IOUtils;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
+import umm3601.machines.MachineController;
+import umm3601.machines.MachineRequestHandler;
 
 import static spark.Spark.*;
 import java.io.InputStream;
