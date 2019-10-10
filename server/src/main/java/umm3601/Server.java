@@ -12,17 +12,27 @@ import umm3601.user.UserRequestHandler;
 import static spark.Spark.*;
 import java.io.InputStream;
 
+// import for Machine files
+import umm3601.machine.MachineController;
+import umm3601.machine.MachineRequestHandler;
+
 public class Server {
   private static final String userDatabaseName = "dev";
+  private static final String machineDatabaseName = "dev";
+
   private static final int serverPort = 4567;
 
   public static void main(String[] args) {
 
     MongoClient mongoClient = new MongoClient();
     MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
+    MongoDatabase machineDatabase = mongoClient.getDatabase(machineDatabaseName);
 
     UserController userController = new UserController(userDatabase);
     UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
+
+    MachineController machineController = new MachineController(machineDatabase);
+    MachineRequestHandler machineRequestHandler = new MachineRequestHandler(machineController);
 
     //Configure Spark
     port(serverPort);
@@ -65,6 +75,12 @@ public class Server {
     get("api/users", userRequestHandler::getUsers);
     get("api/users/:id", userRequestHandler::getUserJSON);
     post("api/users/new", userRequestHandler::addNewUser);
+
+    // List machines, filtered using query parameters
+
+    get("api/machines", machineRequestHandler::getMachines);
+    get("api/machines/:id", machineRequestHandler::getMachineJSON);
+    post("api/machines/new", machineRequestHandler::addNewMachine);
 
     // An example of throwing an unhandled exception so you can see how the
     // Java Spark debugger displays errors like this.
