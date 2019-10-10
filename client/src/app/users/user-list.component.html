@@ -41,7 +41,7 @@
                                *ngFor="let user of this.filteredUsers">
             <mat-expansion-panel-header>
               <mat-panel-title matTooltip="email: {{user.email}}">{{user.name}}</mat-panel-title>
-
+              <mat-accordion *ngIf="user.age == '27'"><mat-icon>home</mat-icon></mat-accordion>
             </mat-expansion-panel-header>
             <mat-panel-description>Works for {{user.company}}</mat-panel-description>
             <mat-panel-description>Age: {{user.age}} years old</mat-panel-description>
