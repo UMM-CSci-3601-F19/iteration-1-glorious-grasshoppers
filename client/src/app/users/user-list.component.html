@@ -39,9 +39,8 @@
         <mat-accordion *ngIf="users; else usersError">
           <mat-expansion-panel #elem class="users" [id]="user.email" [expanded]="this.isHighlighted(user)"
                                *ngFor="let user of this.filteredUsers">
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header><mat-panel-description *ngIf="user.age == '27'"> Current Status: {{user.age}} <mat-icon>home</mat-icon></mat-panel-description>
               <mat-panel-title matTooltip="email: {{user.email}}">{{user.name}}</mat-panel-title>
-              <mat-accordion *ngIf="user.age == '27'"><mat-icon>home</mat-icon></mat-accordion>
             </mat-expansion-panel-header>
             <mat-panel-description>Works for {{user.company}}</mat-panel-description>
             <mat-panel-description>Age: {{user.age}} years old</mat-panel-description>
