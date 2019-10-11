@@ -1,0 +1,92 @@
+[
+  {
+    "_id": {
+      "oid": "5da0beba238319d424a831e0"
+    },
+    "type": "Washer",
+    "running": false,
+    "status": "Invisible",
+    "room_id": "independence_hall"
+  },
+  {
+    "_id": {
+      "oid": "5da0bebacc3710e45a393599"
+    },
+    "type": "Washer",
+    "running": true,
+    "status": "Invisible",
+    "room_id": "apartments"
+  },
+  {
+    "_id": {
+      "oid": "5da0beba4f8bc056104c93e8"
+    },
+    "type": "Washer",
+    "running": true,
+    "status": "Invisible",
+    "room_id": "independence_hall"
+  },
+  {
+    "_id": {
+      "oid": "5da0beba7fd2fdd3ca925c70"
+    },
+    "type": "Dryer",
+    "running": false,
+    "status": "Broken",
+    "room_id": "spooner_hall"
+  },
+  {
+    "_id": {
+      "oid": "5da0beba48922c37b464134d"
+    },
+    "type": "Washer",
+    "running": true,
+    "status": "Broken",
+    "room_id": "independence_hall"
+  },
+  {
+    "_id": {
+      "oid": "5da0beba6f1c87d6cd2a6285"
+    },
+    "type": "Washer",
+    "running": true,
+    "status": "Broken",
+    "room_id": "apartments"
+  },
+  {
+    "_id": {
+      "oid": "5da0bebadd8fc082f1724925"
+    },
+    "type": "Dryer",
+    "running": false,
+    "status": "Broken",
+    "room_id": "independence_hall"
+  },
+  {
+    "_id": {
+      "oid": "5da0beba533e81d1db2da170"
+    },
+    "type": "Washer",
+    "running": false,
+    "status": "Broken",
+    "room_id": "apartments"
+  },
+  {
+    "_id": {
+      "oid": "5da0bebaa9274dedde600cf2"
+    },
+    "type": "Washer",
+    "running": true,
+    "status": "Invisible",
+    "room_id": "gay_hall"
+  },
+  {
+    "_id": {
+      "oid": "5da0beba1e6b7d48052e5d36"
+    },
+    "type": "Dryer",
+    "running": false,
+    "status": "Broken",
+    "room_id": "gay_hall"
+  }
+]
