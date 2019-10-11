@@ -67,6 +67,11 @@ export class MachineListComponent implements OnInit {
     this.updateFilter();
   }
 
+  public updateStatus(newStatus:boolean): void {
+    this.machineStatus = newStatus;
+    this.updateFilter();
+  }
+
   public updateFilter() {
     this.filteredMachines =
       this.machineListService.filterMachines(
