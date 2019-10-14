@@ -77,12 +77,14 @@ public class MachineRequestHandler {
 
     Document newMachine = Document.parse(req.body());
 
+    String name = newMachine.getString("name");
     String type = newMachine.getString("type");
     boolean running = newMachine.getBoolean("running");
     String status = newMachine.getString("status");
+    //int position = newMachine.getInteger("position");
     String room_id = newMachine.getString("room_id");
 
-    System.err.println("Adding new machine [type=" + type + ", running=" + running + " status=" + status + " room_id=" + room_id + ']');
-    return machineController.addNewMachine(type, running, status, room_id);
+    System.err.println("Adding new machine [name=" + name + ", type=" + type + ", running=" + running + " status=" + status + " room_id=" + room_id + ']');
+    return machineController.addNewMachine(name, type, running, status, room_id);
   }
 }
