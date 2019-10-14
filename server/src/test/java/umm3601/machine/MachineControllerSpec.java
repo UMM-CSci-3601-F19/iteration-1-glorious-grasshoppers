@@ -134,7 +134,7 @@ public class MachineControllerSpec {
 
   @Test
   public void addMachineTest() {
-    String newId = machineController.addNewMachine("washer", true, "broken", "candyland");
+    String newId = machineController.addNewMachine("bubble-blaster","washer", true, "broken", "candyland");
 
     assertNotNull("Add new machine should return true when machine is added,", newId);
     Map<String, String[]> argMap = new HashMap<>();
