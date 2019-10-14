@@ -24,7 +24,7 @@ export class MachineListService {
     return this.http.get<Machine>(this.machineUrl + '/' + id);
   }
 
-  public filterMachines(machines: Machine[], searchType: string, searchRoom: string): Machine[] {
+  public filterMachines(machines: Machine[], searchName: string, searchType: string, searchRoom: string): Machine[] {
 
     let filteredMachines = machines;
 

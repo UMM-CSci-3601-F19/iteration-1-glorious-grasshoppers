@@ -17,6 +17,7 @@ export class MachineListComponent implements OnInit {
 
   // These are the target values used in searching.
   // We should rename them to make that clearer.
+  public machineName: string;
   public machineType: string;
   public machineStatus: boolean;
   public machineRoom: string;
@@ -57,6 +58,11 @@ export class MachineListComponent implements OnInit {
   //   });
   // }
 
+  public updateName(newName: string): void {
+    this.machineName = newName;
+    this.updateFilter();
+  }
+
   public updateType(newType: string): void {
     this.machineType = newType;
     this.updateFilter();
@@ -76,6 +82,7 @@ export class MachineListComponent implements OnInit {
     this.filteredMachines =
       this.machineListService.filterMachines(
         this.machines,
+        this.machineName,
         this.machineType,
         this.machineRoom
       );
