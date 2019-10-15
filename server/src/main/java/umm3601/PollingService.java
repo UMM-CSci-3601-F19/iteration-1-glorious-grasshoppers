@@ -7,18 +7,14 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import org.bson.BSONObject;
-import org.bson.BsonArray;
-import org.bson.BsonDocument;
-import org.bson.Document;
+import com.mongodb.internal.connection.Time;
+import org.bson.*;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 class PollingService {
 
@@ -71,20 +67,22 @@ class PollingService {
 
   private void updateAllMachineData(String responseData) {
 
-    //MongoDatabase db = mongoClient.getDatabase("machineDataFromPollingAPI");
-    //MongoCollection<Document> collection = db.getCollection("machineData");
-    //
-
     BsonArray theArray = BsonArray.parse(responseData);
+    Iterator<BsonValue> bsonValues = theArray.iterator();
     System.out.println("THE ARRAY OF DATA IS THIS MANY ITEMS:" + theArray.size());
 
-    //List<BsonDocument> machineDataElements = new ArrayList<>();
-    //for (int i=0; i<theArray.size(); i++) {
-    //  machineDataElements.add(new BsonDocument(theArray.iterator().getElement(i)));
-    //}
+    while (bsonValues.hasNext()) {
+      BsonDocument thisDocument = bsonValues.next().asDocument();
+      System.out.println(thisDocument);
 
-    //machineDataFromPollingAPICollection.insertMany(machineDataElements);
-
+      Document d = new Document();
+      for (Map.Entry<String, BsonValue> e : thisDocument.entrySet()) {
+        d.append(e.getKey(), e.getValue());
+      }
+      //It would probably be better to use the timestamp of the database, but this might make it easier to index
+      d.append("timestamp", ""+Time.nanoTime());
+      machineDataFromPollingAPICollection.insertOne(d);
+    }
   }
 
 
