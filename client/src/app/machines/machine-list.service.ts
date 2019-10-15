@@ -28,6 +28,14 @@ export class MachineListService {
 
     let filteredMachines = machines;
 
+    if (searchName != null) {
+      searchName = searchName.toLocaleLowerCase();
+
+      filteredMachines = filteredMachines.filter(machine => {
+        return !searchName || machine.name.toLowerCase().indexOf(searchName) !== -1;
+      });
+    }
+
     // Filter by machine type
     if (searchType != null) {
       searchType = searchType.toLocaleLowerCase();
@@ -37,41 +45,49 @@ export class MachineListService {
       });
     }
 
-    // Filter by room id
-    if (searchRoom != null) {
-      filteredMachines = filteredMachines.filter(machine => {
-        return !searchRoom || machine.room_id == searchRoom;
-      });
+    // if (searchRoom != null) {
+    //   searchRoom = searchRoom.toLocaleLowerCase();
+    //
+    //   filteredMachines = filteredMachines.filter(machine => {
+    //     return !searchRoom || machine.room_id.toLowerCase().indexOf(searchRoom) !== -1;
+    //   });
+    // }
+    //Filter by room id
+      if (searchRoom != null) {
+        filteredMachines = filteredMachines.filter(machine => {
+          return !searchRoom || machine.room_id == searchRoom;
+        });
+      }
+
+      return filteredMachines;
     }
 
-    return filteredMachines;
-  }
-
-  filterByRoom(machineRoom?: string): void {
-    if (!(machineRoom == null || machineRoom === '')) {
-      if (this.parameterPresent('room_id=')) {
-        // there was a previous search by company that we need to clear
-        this.removeParameter('room_id=');
-      }
-      if (this.machineUrl.indexOf('?') !== -1) {
-        // there was already some information passed in this url
-        this.machineUrl += 'room_id=' + machineRoom + '&';
-      } else {
-        // this was the first bit of information to pass in the url
-        this.machineUrl += '?room_id=' + machineRoom + '&';
-      }
-    } else {
-      // there was nothing in the box to put onto the URL... reset
-      if (this.parameterPresent('room_id=')) {
-        let start = this.machineUrl.indexOf('room_id=');
-        const end = this.machineUrl.indexOf('&', start);
-        if (this.machineUrl.substring(start - 1, start) === '?') {
-          start = start - 1;
+    filterByRoom(machineRoom?: string): void {
+      if (!(machineRoom == null || machineRoom === '')) {
+        if (this.parameterPresent('room_id=')) {
+          // there was a previous search by room that we need to clear
+          this.removeParameter('room_id=');
         }
-        this.machineUrl = this.machineUrl.substring(0, start) + this.machineUrl.substring(end + 1);
+        if (this.machineUrl.indexOf('?') !== -1) {
+          // there was already some information passed in this url
+          this.machineUrl += 'room_id=' + machineRoom + '&';
+        } else {
+          // this was the first bit of information to pass in the url
+          this.machineUrl += '?room_id=' + machineRoom + '&';
+        }
+      } else {
+        // there was nothing in the box to put onto the URL... reset
+        if (this.parameterPresent('room_id=')) {
+          let start = this.machineUrl.indexOf('room_id=');
+          const end = this.machineUrl.indexOf('&', start);
+          if (this.machineUrl.substring(start - 1, start) === '?') {
+            start = start - 1;
+          }
+          this.machineUrl = this.machineUrl.substring(0, start) + this.machineUrl.substring(end + 1);
+        }
       }
     }
-  }
+
 
   private parameterPresent(searchParam: string) {
     return this.machineUrl.indexOf(searchParam) !== -1;
