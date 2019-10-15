@@ -10,12 +10,25 @@
       <mat-divider></mat-divider>
       <mat-card-content>
         <mat-form-field>
-          <input
-            matInput
-            id="machineType" #input
-            type="text"
-            placeholder="Filter by Machine Type"
-            (input)="updateType($event.target.value)">
+          <mat-placeholder> Filter by Room </mat-placeholder>
+          <mat-select [(value)]="selectedRoom">
+            <mat-option>None</mat-option>
+            <mat-option value="gay">Gay Hall</mat-option>
+            <mat-option value="independence">Independence Hall</mat-option>
+            <mat-option value="green_prairie">Green Prairie Hall</mat-option>
+            <mat-option value="the_apartments">The Apartments</mat-option>
+            <mat-option value="blakely">Blakely Hall</mat-option>
+            <mat-option value="pine">Pine Hall</mat-option>
+            <mat-option value="spooner">Spooner Hall</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+        <mat-placeholder> Filter by Type </mat-placeholder>
+        <mat-select [(value)]="selectedType">
+          <mat-option>None</mat-option>
+          <mat-option value="washer">Washer</mat-option>
+          <mat-option value="dryer">Dryer</mat-option>
+        </mat-select>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -26,23 +39,12 @@
             (input)="updateStatus($event.target.value)">
         </mat-form-field>
         <mat-form-field>
-          <!--<input
+          <input
             matInput
-            id="machineRoom" #input
+            id="machineName" #input
             type="text"
-            placeholder="Filter by Room ID"
-            (input)="updateRoom($event.target.value)"> -->
-          <mat-placeholder> Filter by Room </mat-placeholder>
-          <mat-select [(value)]="selected">
-            <mat-option>None</mat-option>
-            <mat-option value="gay">Gay Hall</mat-option>
-            <mat-option value="independence">Independence Hall</mat-option>
-            <mat-option value="green_prairie">Green Prairie Hall</mat-option>
-            <mat-option value="the_apartments">The Apartments</mat-option>
-            <mat-option value="blakely">Blakely Hall</mat-option>
-            <mat-option value="pine">Pine Hall</mat-option>
-            <mat-option value="spooner">Spooner Hall</mat-option>
-          </mat-select>
+            placeholder="Filter by Machine Name"
+            (input)="updateName($event.target.value)">
         </mat-form-field>
         <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
         </button>
