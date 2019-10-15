@@ -34,6 +34,8 @@ public class Server {
     MachineController machineController = new MachineController(machineDatabase);
     MachineRequestHandler machineRequestHandler = new MachineRequestHandler(machineController);
 
+    PollingService pollingService = new PollingService(mongoClient);
+
     //Configure Spark
     port(serverPort);
 
