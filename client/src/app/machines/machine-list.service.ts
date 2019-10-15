@@ -9,8 +9,9 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class MachineListService {
-  readonly baseUrl: string = environment.API_URL + 'machines';
-  private machineUrl: string = this.baseUrl;
+  readonly baseUrl: string = environment.API_URL;
+  private machineUrl: string = this.baseUrl + 'machines';
+  private roomUrl: string = this.baseUrl + 'rooms';
 
   constructor(private http: HttpClient) {
   }
