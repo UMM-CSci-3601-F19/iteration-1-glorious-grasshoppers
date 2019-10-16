@@ -2,6 +2,7 @@ package umm3601;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import com.sun.java.browser.net.ProxyService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -11,6 +12,9 @@ import umm3601.user.UserRequestHandler;
 
 import static spark.Spark.*;
 import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.net.Proxy;
+import java.net.Socket;
 
 // import for Machine files
 import umm3601.machine.MachineController;
@@ -80,6 +84,7 @@ public class Server {
 
     // List machines, filtered using query parameters
 
+    pollingService.poll();
     get("api/machines", machineRequestHandler::getMachines);
     get("api/machines/:id", machineRequestHandler::getMachineJSON);
     post("api/machines/new", machineRequestHandler::addNewMachine);
@@ -106,7 +111,6 @@ public class Server {
       return "Sorry, we couldn't find that!";
     });
   }
-
   // Enable GZIP for all responses
   private static void addGzipHeader(Request request, Response response) {
     response.header("Content-Encoding", "gzip");

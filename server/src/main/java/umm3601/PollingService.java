@@ -31,7 +31,7 @@ class PollingService {
     this.poll();
   }
 
-  private void poll() {
+  public void poll() {
     try {
       URL url = new URL(baseApiUrl + "machines");
       HttpURLConnection conn = (HttpURLConnection)url.openConnection();
