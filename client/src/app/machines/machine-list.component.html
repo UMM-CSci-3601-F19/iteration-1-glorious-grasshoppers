@@ -1,0 +1,81 @@
+<!--<div>-->
+<!--  <button id="addNewUser" mat-raised-button (click)="openDialog()">Add New User</button>-->
+<!--</div>-->
+
+
+<div layout-gt-sm="row">
+  <div flex-gt-sm="80" flex-offset-gt-sm="10">
+    <mat-card>
+      <mat-card-title id="machine-list-title"><mat-icon>local_laundry_service</mat-icon> Machines </mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-form-field>
+          <mat-placeholder> Filter by Room </mat-placeholder>
+          <mat-select [(value)]="selectedRoom">
+            <mat-option>None</mat-option>
+            <mat-option value="gay">Gay Hall</mat-option>
+            <mat-option value="independence">Independence Hall</mat-option>
+            <mat-option value="green_prairie">Green Prairie Hall</mat-option>
+            <mat-option value="the_apartments">The Apartments</mat-option>
+            <mat-option value="blakely">Blakely Hall</mat-option>
+            <mat-option value="pine">Pine Hall</mat-option>
+            <mat-option value="spooner">Spooner Hall</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+        <mat-placeholder> Filter by Type </mat-placeholder>
+        <mat-select [(value)]="selectedType">
+          <mat-option>None</mat-option>
+          <mat-option value="washer">Washer</mat-option>
+          <mat-option value="dryer">Dryer</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            id="machineStatus" #input
+            type="text"
+            placeholder="Filter by Machine Status"
+            (input)="updateStatus($event.target.value)">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            id="machineName" #input
+            type="text"
+            placeholder="Filter by Machine Name"
+            (input)="updateName($event.target.value)">
+        </mat-form-field>
+        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
+        </button>
+
+        <mat-accordion *ngIf="machines; else machinesError">
+          <mat-expansion-panel #elem class="machines" [id]="machine.name" [expanded]="this.isHighlighted(machine)"
+                               *ngFor="let machine of this.filteredMachines">
+            <mat-expansion-panel-header>
+              <mat-panel-description *ngIf="machine.running; else elseBlock" [ngStyle]="{'color':'green'}">Machine is Running <mat-icon>local_laundry_service</mat-icon></mat-panel-description>
+              <ng-template #elseBlock [ngStyle]="{'color':'red'}"> Machine is Not Running <mat-icon>not_interested</mat-icon></ng-template>
+              <mat-panel-description *ngIf="machine.status == 'broken' && machine.running != true" [ngStyle]="{'color':'yellow'}"> Current Status: {{machine.status}} <mat-icon>build</mat-icon></mat-panel-description>
+<!--              <mat-panel-description *ngIf="machine.status == 'normal'" [ngStyle]="{'color':'green'}"> Current Status: {{machine.status}} <mat-icon>thumb_up</mat-icon></mat-panel-description>-->
+<!--              <mat-panel-description *ngIf="machine.status == 'invisible'" [ngStyle]="{'color':'grey'}"> Current Status: {{machine.status}} <mat-icon>blur_on</mat-icon></mat-panel-description>-->
+              <mat-panel-title matTooltip="Running: {{machine.running}}">{{machine.room_id}}</mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <mat-panel-description>Type of machine {{machine.type}}</mat-panel-description>
+            <mat-panel-description>Status of the machine: {{machine.status}}</mat-panel-description>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+        <ng-template #machinesError>
+          <mat-error>
+            There was a problem loading the machines. Possibly the server is down or perhaps there are network
+            issues.
+          </mat-error>
+          <mat-error>
+            Please wait a bit and try again or start the server.
+          </mat-error>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

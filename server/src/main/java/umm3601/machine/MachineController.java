@@ -102,18 +102,20 @@ public class MachineController {
    * @param room_id the email of the new machine
    * @return boolean after successfully or unsuccessfully adding a machine
    */
-  public String addNewMachine(String type, boolean running, String status, String room_id) {
+  public String addNewMachine(String name, String type, boolean running, String status, String room_id) {
 
     Document newMachine = new Document();
+    newMachine.append("name", name);
     newMachine.append("type", type);
     newMachine.append("running", running);
     newMachine.append("status", status);
+    //newMachine.append("position", position);
     newMachine.append("room_id", room_id);
 
     try {
       machineCollection.insertOne(newMachine);
       ObjectId id = newMachine.getObjectId("_id");
-      System.err.println("Successfully added new machine [_id=" + id + ", type=" + type + ", running=" + running + " status=" + status + " room_id=" + room_id + ']');
+      System.err.println("Successfully added new machine [_id=" + id + ", name=" + name + ", type=" + type + ", running=" + running + " status=" + status + " room_id=" + room_id + ']');
       return id.toHexString();
     } catch (MongoException me) {
       me.printStackTrace();
