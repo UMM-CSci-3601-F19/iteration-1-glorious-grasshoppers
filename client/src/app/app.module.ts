@@ -7,15 +7,15 @@ import {HomeComponent} from './home/home.component';
 import {UserListComponent} from './users/user-list.component';
 import {MachineListComponent} from './machines/machine-list.component';
 import {UserListService} from './users/user-list.service';
-import {MachineListService} from "./machines/machine-list.service";
+import {MachineListService} from './machines/machine-list.service';
 
 import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
 
 import {CustomModule} from './custom.module';
 import {AddUserComponent} from './users/add-user.component';
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
