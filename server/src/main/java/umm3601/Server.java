@@ -84,7 +84,6 @@ public class Server {
 
     // List machines, filtered using query parameters
 
-    pollingService.poll();
     get("api/machines", machineRequestHandler::getMachines);
     get("api/machines/:id", machineRequestHandler::getMachineJSON);
     post("api/machines/new", machineRequestHandler::addNewMachine);
