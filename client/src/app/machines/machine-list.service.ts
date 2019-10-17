@@ -25,9 +25,17 @@ export class MachineListService {
     return this.http.get<Machine>(this.machineUrl + '/' + id);
   }
 
-  public filterMachines(machines: Machine[], searchName: string, searchType: string, searchRoom: string): Machine[] {
+  public filterMachines(machines: Machine[], searchName: string, searchType: string, searchStatus: string, searchRoom: string): Machine[] {
 
     let filteredMachines = machines;
+
+    if (searchStatus != null) {
+      searchStatus = searchStatus.toLocaleLowerCase();
+
+      filteredMachines = filteredMachines.filter(machine => {
+        return !searchStatus || machine.status.toLowerCase().indexOf(searchStatus) !== -1;
+      });
+    }
 
     if (searchName != null) {
       searchName = searchName.toLocaleLowerCase();
@@ -38,14 +46,19 @@ export class MachineListService {
     }
 
     // Filter by machine type
-    if (searchType != null) {
-      searchType = searchType.toLocaleLowerCase();
+    // if (searchType != null) {
+    //   searchType = searchType.toLocaleLowerCase();
+    //
+    //   filteredMachines = filteredMachines.filter(machine => {
+    //     return !searchType || machine.type.toLowerCase().indexOf(searchType) !== -1;
+    //   });
+    // }
 
+    if (searchType != null) {
       filteredMachines = filteredMachines.filter(machine => {
-        return !searchType || machine.type.toLowerCase().indexOf(searchType) !== -1;
+        return !searchType || machine.type == searchType;
       });
     }
-
     // if (searchRoom != null) {
     //   searchRoom = searchRoom.toLocaleLowerCase();
     //
