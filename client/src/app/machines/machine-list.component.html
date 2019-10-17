@@ -46,15 +46,16 @@
             placeholder="Filter by Machine Name"
             (input)="updateName($event.target.value)">
         </mat-form-field>
-        <button mat-raised-button id="submit" color="primary" #input type="button"
-                (click)="updateType(selectedType)"(click)="updateRoom(selectedRoom)"(click)="loadService()">Submit
-        </button>
+        <button mat-raised-button id="filter" color="primary" #input type="button"
+                (click)="updateType(selectedType)" (click)="updateRoom(selectedRoom)">Filter</button>
+<!--        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit</button>-->
+
 
         <mat-accordion *ngIf="machines; else machinesError">
           <mat-expansion-panel #elem class="machines" [id]="machine.name" [expanded]="this.isHighlighted(machine)"
                                *ngFor="let machine of this.filteredMachines">
             <mat-expansion-panel-header>
-              <mat-panel-description *ngIf="machine.running " [ngStyle]="{'color':'blue'}">Machine is Running <mat-icon>local_laundry_service</mat-icon>
+              <mat-panel-description *ngIf="machine.running " [ngStyle]="{'color':'#F4C430'}">Machine is Running <mat-icon>local_laundry_service</mat-icon>
 
               </mat-panel-description>
               <mat-panel-description *ngIf="!machine.running" [ngStyle]="{'color':'green'}">Machine is Available! <mat-icon>thumb_up</mat-icon></mat-panel-description>
