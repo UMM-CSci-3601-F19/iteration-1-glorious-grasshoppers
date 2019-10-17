@@ -33,7 +33,7 @@ public class MachineControllerSpec {
   public void clearAndPopulateDB() {
     MongoClient mongoClient = new MongoClient();
     MongoDatabase db = mongoClient.getDatabase("test");
-    MongoCollection<Document> machineDocuments = db.getCollection("machines");
+    MongoCollection<Document> machineDocuments = db.getCollection("machineDataFromPollingAPI");
     machineDocuments.drop();
     List<Document> testMachines = new ArrayList<>();
     testMachines.add(Document.parse("{\n" +
