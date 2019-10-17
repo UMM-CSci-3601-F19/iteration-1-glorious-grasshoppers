@@ -22,7 +22,7 @@ export class MachineListComponent implements OnInit {
   // We should rename them to make that clearer.
   public machineName: string;
   public machineType: string;
-  public machineStatus: boolean;
+  public machineStatus: string;
   public machineRoom: string;
 
   // The ID of the
@@ -76,7 +76,7 @@ export class MachineListComponent implements OnInit {
     this.updateFilter();
   }
 
-  public updateStatus(newStatus:boolean): void {
+  public updateStatus(newStatus:string): void {
     this.machineStatus = newStatus;
     this.updateFilter();
   }
@@ -87,6 +87,7 @@ export class MachineListComponent implements OnInit {
         this.machines,
         this.machineName,
         this.machineType,
+        this.machineStatus,
         this.machineRoom
       );
   }
