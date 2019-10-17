@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {CustomModule} from '../custom.module';
 import {MachineListService} from './machine-list.service';
 import {FormsModule} from '@angular/forms';
+import 'rxjs-compat/add/observable/of';
 
 describe('MachineListComponent', () => {
 
