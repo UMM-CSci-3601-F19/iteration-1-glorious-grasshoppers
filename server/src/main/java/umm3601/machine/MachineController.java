@@ -27,7 +27,7 @@ public class MachineController {
    * @param database the database containing machine data
    */
   public MachineController(MongoDatabase database) {
-    machineCollection = database.getCollection("machines");
+    machineCollection = database.getCollection("machineDataFromPollingAPI");
   }
 
   /**
