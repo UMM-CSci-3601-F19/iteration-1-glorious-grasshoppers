@@ -54,7 +54,7 @@
                                *ngFor="let machine of this.filteredMachines">
             <mat-expansion-panel-header>
               <mat-panel-description *ngIf="machine.running; else elseBlock" [ngStyle]="{'color':'green'}">Machine is Running <mat-icon>local_laundry_service</mat-icon></mat-panel-description>
-              <ng-template #elseBlock [ngStyle]="{'color':'red'}"> Machine is Not Running <mat-icon>not_interested</mat-icon></ng-template>
+<!--              <ng-template #elseBlock [ngStyle]="{'color':'red'}"> Machine is Not Running <mat-icon>not_interested</mat-icon></ng-template>-->
               <mat-panel-description *ngIf="machine.status == 'broken' && machine.running != true" [ngStyle]="{'color':'yellow'}"> Current Status: {{machine.status}} <mat-icon>build</mat-icon></mat-panel-description>
 <!--              <mat-panel-description *ngIf="machine.status == 'normal'" [ngStyle]="{'color':'green'}"> Current Status: {{machine.status}} <mat-icon>thumb_up</mat-icon></mat-panel-description>-->
 <!--              <mat-panel-description *ngIf="machine.status == 'invisible'" [ngStyle]="{'color':'grey'}"> Current Status: {{machine.status}} <mat-icon>blur_on</mat-icon></mat-panel-description>-->
