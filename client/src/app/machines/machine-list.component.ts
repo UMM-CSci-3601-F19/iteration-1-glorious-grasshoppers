@@ -11,8 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class MachineListComponent implements OnInit {
-  selectedRoom = 'None';
-  selectedType = 'None';
+  selectedRoom = null;
+  selectedType = null;
 
   // These are public so that tests can reference them (.spec.ts)
   public machines: Machine[];
