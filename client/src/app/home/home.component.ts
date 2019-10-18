@@ -5,9 +5,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  public text: string;
+  public question: string;
+  public answer: string;
 
   constructor() {
-    this.text = "This is a home page! It doesn't do anything!";
+    this.question = "Q: How much fun is doing your laundry?";
+    this.answer = "A: Loads"
   }
 }

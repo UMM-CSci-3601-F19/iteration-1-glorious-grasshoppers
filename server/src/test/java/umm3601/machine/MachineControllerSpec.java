@@ -33,7 +33,7 @@ public class MachineControllerSpec {
   public void clearAndPopulateDB() {
     MongoClient mongoClient = new MongoClient();
     MongoDatabase db = mongoClient.getDatabase("test");
-    MongoCollection<Document> machineDocuments = db.getCollection("machines");
+    MongoCollection<Document> machineDocuments = db.getCollection("machineDataFromPollingAPI");
     machineDocuments.drop();
     List<Document> testMachines = new ArrayList<>();
     testMachines.add(Document.parse("{\n" +
@@ -134,7 +134,7 @@ public class MachineControllerSpec {
 
   @Test
   public void addMachineTest() {
-    String newId = machineController.addNewMachine("washer", true, "broken", "candyland");
+    String newId = machineController.addNewMachine("bubble-blaster","washer", true, "broken", "candyland");
 
     assertNotNull("Add new machine should return true when machine is added,", newId);
     Map<String, String[]> argMap = new HashMap<>();

@@ -11,9 +11,9 @@
         Home
       </mat-list-item>
 
-      <mat-list-item href="#" routerLink="/users" routerLinkActive="drawer-list-item-active" (click)="drawer.close()">
-        <mat-icon matListIcon>people</mat-icon>
-        Users
+      <mat-list-item href="#" routerLink="/machines" routerLinkActive="drawer-list-item-active" (click)="drawer.close()">
+        <mat-icon matListIcon>local_laundry_service</mat-icon>
+        Machines
       </mat-list-item>
 
     </mat-nav-list>
@@ -27,7 +27,8 @@
         (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span class="app-title">Production Template</span>
+      <img class="logo" src="https://i.imgur.com/KwiKNmo.png" alt="U of M M logo"width="70px">
+      <span class="app-title">UMM Laundry Service</span>
     </mat-toolbar>
     <div class="main-content mat-typography">
       <router-outlet></router-outlet>

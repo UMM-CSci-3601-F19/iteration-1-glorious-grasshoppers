@@ -2,22 +2,23 @@ package umm3601;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import com.sun.java.browser.net.ProxyService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.utils.IOUtils;
-import umm3601.user.UserController;
-import umm3601.user.UserRequestHandler;
 
 import static spark.Spark.*;
 import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.net.Proxy;
+import java.net.Socket;
 
 // import for Machine files
 import umm3601.machine.MachineController;
 import umm3601.machine.MachineRequestHandler;
 
 public class Server {
-  private static final String userDatabaseName = "dev";
   private static final String machineDatabaseName = "dev";
 
   private static final int serverPort = 4567;
@@ -25,14 +26,12 @@ public class Server {
   public static void main(String[] args) {
 
     MongoClient mongoClient = new MongoClient();
-    MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
     MongoDatabase machineDatabase = mongoClient.getDatabase(machineDatabaseName);
-
-    UserController userController = new UserController(userDatabase);
-    UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
     MachineController machineController = new MachineController(machineDatabase);
     MachineRequestHandler machineRequestHandler = new MachineRequestHandler(machineController);
+
+    PollingService pollingService = new PollingService(mongoClient);
 
     //Configure Spark
     port(serverPort);
@@ -67,15 +66,6 @@ public class Server {
 
     get("/", clientRoute);
 
-    /// User Endpoints ///////////////////////////
-    /////////////////////////////////////////////
-
-    //List users, filtered using query parameters
-
-    get("api/users", userRequestHandler::getUsers);
-    get("api/users/:id", userRequestHandler::getUserJSON);
-    post("api/users/new", userRequestHandler::addNewUser);
-
     // List machines, filtered using query parameters
 
     get("api/machines", machineRequestHandler::getMachines);
@@ -104,7 +94,6 @@ public class Server {
       return "Sorry, we couldn't find that!";
     });
   }
-
   // Enable GZIP for all responses
   private static void addGzipHeader(Request request, Response response) {
     response.header("Content-Encoding", "gzip");
